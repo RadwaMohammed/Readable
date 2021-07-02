@@ -22,3 +22,16 @@ code {
   margin-left: -4rem;
 
 }
+
+/* Header Component */
+.header-link {
+  display: block;
+  margin: 1em auto;
+  text-align: center;
+}
+.header-link:hover {
+  text-decoration: none;
+}
+.home-icon {
+  margin-top: -0.2em;
+}
