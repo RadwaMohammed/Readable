@@ -1,16 +1,30 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { sortBy } from '../utils/helper';
 import Categories from './Categories';
 import PostsList from './PostsList';
 import AddPostBtn from './AddPostBtn';
+import SortBy from './SortBy';
+
 
 class AllPosts extends Component {
+  state={
+    sortOption: 'timestamp-desc'
+  }
+  /**
+   * Update ths state with the sorte option
+   */
+  handleSorting = value => this.setState({sortOption: value});
+
   render() {
-    const {posts} = this.props;
+    const {sortOption} = this.state;
+    // Sort posts depending on user's option
+    const posts = sortBy(this.props.posts, sortOption);
     return (
       <Fragment>
         <Categories />
         <AddPostBtn />
+        <SortBy handleSorting={this.handleSorting} />
         <PostsList posts={posts} />
       </Fragment>
     )

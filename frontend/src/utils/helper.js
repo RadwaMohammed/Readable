@@ -60,3 +60,17 @@ export function formatComment({ body, author, parentId }) {
     parentDeleted: false
   };
 }
+
+/**
+ * Function sortBy
+ * @param {array} arr - The array to be sorted
+ * @param {string} option - The user's option that array'll be sorted by
+ * @returns An array sorted depending on user selection
+ */
+export function sortBy(arr, option) {
+  const [prop, order] = option.split('-'); 
+  return arr.sort((a, b) => order === 'asc' 
+    ? a[prop] - b[prop] 
+    : b[prop] - a[prop]
+  );
+}
