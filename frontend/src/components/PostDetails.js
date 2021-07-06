@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { formatDate, sortBy } from '../utils/helper';
-import { FaChevronUp, FaChevronDown, FaTrashAlt, FaEdit } from "react-icons/fa";
+import { handleVotePost } from '../actions/posts';
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
 import SortBy from './SortBy';
+import VoteBtn from './VoteBtn';
 
 class PostDetails extends Component {
   state={
@@ -17,7 +19,7 @@ class PostDetails extends Component {
   handleSorting = value => this.setState({sortOption: value});
   render() {  
     const { sortOption } = this.state;
-    const { post, comments } = this.props;
+    const { post, comments, handleVotePost } = this.props;
     // Sort posts depending on user's option
     const sortedComments = sortBy(comments, sortOption);
     const {
@@ -38,10 +40,10 @@ class PostDetails extends Component {
           <p>title: {title}</p>
           <p>body: {body}</p>
           <p>author: {author}</p>
-          <p>category: {category}</p>
-          <button><FaChevronUp /></button>
-          <p>vote: {voteScore}</p>
-          <button><FaChevronDown /></button>
+          <p>category: {category}</p>   
+          <VoteBtn id={id} handleVote={handleVotePost}>
+            <p>vote: {voteScore}</p>
+          </VoteBtn>
           <p>comment: {commentCount}</p>
           <button><FaTrashAlt /></button>
           <p></p>
@@ -79,4 +81,13 @@ class PostDetails extends Component {
   }
 };
 
-export default connect(mapStateToProps)(PostDetails);
+/**
+ * The mapDispatchToProps as an object - dispatching actions to the store
+ * <handleAddPost> ction creator
+ */
+ const mapDispatchToProps = {
+  handleVotePost,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

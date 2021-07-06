@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { handleVotePost } from '../actions/posts';
 import { formatDate } from '../utils/helper';
-import { FaChevronUp, FaChevronDown, FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import VoteBtn from './VoteBtn';
 
 
 class Post extends Component {
   render() {
-    const { post } = this.props;
+    const { post, handleVotePost } = this.props;
     const {
       timestamp,
       title,
@@ -26,9 +28,9 @@ class Post extends Component {
         <p>body: {body}</p>
         <p>author: {author}</p>
         <p>category: {category}</p>
-        <button><FaChevronUp /></button>
-        <p>vote: {voteScore}</p>
-        <button><FaChevronDown /></button>  
+        <VoteBtn id={id} handleVote={handleVotePost}>
+          <p>vote: {voteScore}</p>
+        </VoteBtn>
         <p>comment: {commentCount}</p>
         <button><FaTrashAlt /></button>
         <p></p>
@@ -51,4 +53,13 @@ class Post extends Component {
 });
 
 
-export default connect(mapStateToProps)(Post);
+/**
+ * The mapDispatchToProps as an object - dispatching actions to the store
+ * <handleVotePost> ction creator
+ */
+ const mapDispatchToProps = {
+  handleVotePost,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
