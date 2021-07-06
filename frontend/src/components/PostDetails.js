@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from 'react';
+import  { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate, sortBy } from '../utils/helper';
-import { handleVotePost } from '../actions/posts';
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { handleVotePost, handleDeletePost } from '../actions/posts';
+import { FaEdit } from "react-icons/fa";
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
 import SortBy from './SortBy';
 import VoteBtn from './VoteBtn';
+import DeleteBtn from './DeleteBtn';
 
 class PostDetails extends Component {
   state={
@@ -19,7 +21,7 @@ class PostDetails extends Component {
   handleSorting = value => this.setState({sortOption: value});
   render() {  
     const { sortOption } = this.state;
-    const { post, comments, handleVotePost } = this.props;
+    const { post, comments, handleVotePost, handleDeletePost, myPost } = this.props;
     // Sort posts depending on user's option
     const sortedComments = sortBy(comments, sortOption);
     const {
@@ -33,29 +35,34 @@ class PostDetails extends Component {
       id
     } = post;
 
-    return (
+    return  myPost 
+      ? 
       <Fragment>
-        <div>
-          <p>time : {formatDate(timestamp)}</p>
-          <p>title: {title}</p>
-          <p>body: {body}</p>
-          <p>author: {author}</p>
-          <p>category: {category}</p>   
-          <VoteBtn id={id} handleVote={handleVotePost}>
-            <p>vote: {voteScore}</p>
-          </VoteBtn>
-          <p>comment: {commentCount}</p>
-          <button><FaTrashAlt /></button>
-          <p></p>
-          <button><FaEdit /></button>
-          <hr />
-        </div>
-        <AddComment postId={id} />
-        <SortBy handleSorting={this.handleSorting} />
-        <CommentsList comments={sortedComments}/>
-      </Fragment>
-    )
-  }
+      <div>
+        <p>time : {formatDate(timestamp)}</p>
+        <p>title: {title}</p>
+        <p>body: {body}</p>
+        <p>author: {author}</p>
+        <p>category: {category}</p>   
+        <VoteBtn id={id} handleVote={handleVotePost}>
+          <p>vote: {voteScore}</p>
+        </VoteBtn>
+        <p>comment: {commentCount}</p>
+        <DeleteBtn handleDelete={handleDeletePost} id={id}  redirectHome />
+        <p></p>
+        <button><FaEdit /></button>
+        <hr />
+      </div>
+      <AddComment postId={id} />
+      <SortBy handleSorting={this.handleSorting} />
+      <CommentsList comments={sortedComments}/>
+    </Fragment>
+    : 
+    <Redirect to='/404' />
+    }
+      
+    
+  
 }
 
 
@@ -72,9 +79,10 @@ class PostDetails extends Component {
  */
  const mapStateToProps = ({ posts, comments }, props) =>{ 
   const { post_id } = props.match.params;
+  const myPost = Object.values(posts).find(post => post.id === post_id);
   return {
-    post: Object.values(posts)
-      .find(post => post.id === post_id),
+    myPost,
+    post: myPost || {},
     comments: Object.values(comments)
       .filter(comment => comment.parentId === post_id), 
     postId: post_id,
@@ -87,6 +95,7 @@ class PostDetails extends Component {
  */
  const mapDispatchToProps = {
   handleVotePost,
+  handleDeletePost
 };
 
 

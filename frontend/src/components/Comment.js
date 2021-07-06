@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleVoteComment } from '../actions/comments';
+import { handleVoteComment, handleDeleteComment } from '../actions/comments';
 import { formatDate } from '../utils/helper';
-import { FiTrash2, FiEdit } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import VoteBtn from './VoteBtn';
+import DeleteBtn from './DeleteBtn';
 
 class Comment extends Component {
   
   render() {
-    const { comment, handleVoteComment } = this.props;
+    const { comment, handleVoteComment, handleDeleteComment } = this.props;
     const {
       timestamp,
       body,
@@ -26,7 +27,7 @@ class Comment extends Component {
         <VoteBtn id={id} handleVote={handleVoteComment}>
           <p>vote: {voteScore}</p>
         </VoteBtn>
-        <button><FiTrash2 /></button>
+        <DeleteBtn handleDelete={handleDeleteComment} id={id} />
         <p></p>
         <button><FiEdit /></button>
         <hr />
@@ -36,9 +37,11 @@ class Comment extends Component {
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
  * <handleVoteComment> ction creator
+ * <handleDeleteComment> ction creator
  */
  const mapDispatchToProps = {
   handleVoteComment, 
+  handleDeleteComment
 };
 
 
