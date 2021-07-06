@@ -1,16 +1,25 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { formatDate } from '../utils/helper';
+import { formatDate, sortBy } from '../utils/helper';
 import { FaChevronUp, FaChevronDown, FaTrashAlt, FaEdit } from "react-icons/fa";
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
-
-
+import SortBy from './SortBy';
 
 class PostDetails extends Component {
- 
+  state={
+    sortOption: 'timestamp-desc'
+  }
+  /**
+   * Update the state with the user's sort option
+   * @param {string} value - The sort option value
+   */
+  handleSorting = value => this.setState({sortOption: value});
   render() {  
+    const { sortOption } = this.state;
     const { post, comments } = this.props;
+    // Sort posts depending on user's option
+    const sortedComments = sortBy(comments, sortOption);
     const {
       timestamp,
       title,
@@ -40,7 +49,8 @@ class PostDetails extends Component {
           <hr />
         </div>
         <AddComment postId={id} />
-        <CommentsList comments={comments}/>
+        <SortBy handleSorting={this.handleSorting} />
+        <CommentsList comments={sortedComments}/>
       </Fragment>
     )
   }
