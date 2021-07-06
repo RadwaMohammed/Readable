@@ -2,47 +2,52 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { sortBy } from '../utils/helper';
 import Categories from './Categories';
-import PostsList from './PostsList';
 import AddPostBtn from './AddPostBtn';
 import SortBy from './SortBy';
+import PostsList from './PostsList';
 
-class ByCategory extends Component {
+class PostsView extends Component {
   state={
     sortOption: 'timestamp-desc'
   }
   /**
-   * Update ths state with the sorte option
+   * Update the state with the user's sort option
+   * @param {string} value - The sort option value
    */
   handleSorting = value => this.setState({sortOption: value});
-  
+
   render() {
     const { sortOption } = this.state;
+    const { posts } = this.props;
     // Sort posts depending on user's option
-    const posts = sortBy(this.props.posts, sortOption);
+    const sortedPosts = sortBy(posts, sortOption);
     return (
       <Fragment>
         <Categories />
         <AddPostBtn />
         <SortBy handleSorting={this.handleSorting} />
-        <PostsList posts={posts} />
+        <PostsList posts={sortedPosts} />
       </Fragment>
     )
-
   }
 }
 
 /**
- * The mapStateToProps function - get the state parts that ByCategory component needs
+ * The mapStateToProps function - get the state parts that PostsView component needs
  * @param {Object} state - The state of the store 
  * @param {object} state.posts - The  posts slice of the state 
  * @param {Object} props - The component's ownProps
- * @returns {object} An object containing  posts {array} filtered by category 
+ * @returns {object} An object containing  posts {array}
  */
  const mapStateToProps = ({ posts }, props) => {
   const { category } = props.match.params;
+  const AllPosts = Object.values(posts);
+  const myPosts = category 
+    ? AllPosts.filter(post => post.category === category) 
+    : AllPosts;
   return {
-    posts: Object.values(posts).filter(post => post.category === category),
+    posts: myPosts,
   }
   
 };
-export default connect(mapStateToProps)(ByCategory);
+export default connect(mapStateToProps)(PostsView);
