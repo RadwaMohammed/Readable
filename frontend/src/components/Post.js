@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { handleVotePost, handleDeletePost } from '../actions/posts';
+import { handleVotePost, handleDeletePost, handleEditPost } from '../actions/posts';
 import { formatDate } from '../utils/helper';
-import { FaEdit } from "react-icons/fa";
 import VoteBtn from './VoteBtn';
 import DeleteBtn from './DeleteBtn';
+import EditBtn from './EditBtn';
+
 
 
 class Post extends Component {
   render() {
-    const { post, handleVotePost, handleDeletePost } = this.props;
+    const { 
+      post, 
+      handleVotePost, 
+      handleDeletePost, 
+      handleEditPost, 
+      categories
+    } = this.props;
     const {
       timestamp,
       title,
@@ -35,7 +42,7 @@ class Post extends Component {
         <p>comment: {commentCount}</p>
         <DeleteBtn handleDelete={handleDeletePost} id={id} />
         <p></p>
-        <button><FaEdit /></button>
+        <EditBtn id={id} currentData={post} handleEdit={handleEditPost} categories={categories} />
         <hr />
       </div>
 
@@ -43,16 +50,28 @@ class Post extends Component {
     
   }
 }
+/**
+ * The mapStateToProps function - get the state parts that Post component needs
+ * @param {Object} state - The state of the store 
+ * @param {object} state.categories - The categories slice of the state 
+ * @returns {object} An object containing categories {array} 
+ */
+ const mapStateToProps = ({ categories }) => ({
+  categories: Object.values(categories),
+});
+
 
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
  * <handleVotePost> ction creator
  * <handleDeletePost> ction creator
+ * <handleEditPost> ction creator
  */
  const mapDispatchToProps = {
   handleVotePost,
   handleDeletePost,
+  handleEditPost
 };
 
 
-export default connect(null, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
