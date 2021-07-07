@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
-import { FaTrashAlt } from "react-icons/fa";
-
+import { FaTrashAlt } from 'react-icons/fa';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 
 class DeleteBtn extends Component {
@@ -25,7 +26,22 @@ class DeleteBtn extends Component {
     const { backHome } = this.state;
     return (
       <Fragment>
-        <button onClick={() => this.remove()}><FaTrashAlt /></button>
+        <OverlayTrigger 
+          trigger="click" 
+          placement="right" 
+          overlay={
+            <Popover id="popover-basic">
+              <Popover.Title as="h5">Delete</Popover.Title>
+              <Popover.Content>
+                Are you sure?
+                <button onClick={() => document.body.click()}>No</button> 
+                <button onClick={() => this.remove()}>Yes</button>
+              </Popover.Content>
+            </Popover>
+          }
+          rootClose={true}>
+          <button><FaTrashAlt /></button>
+        </OverlayTrigger>
         {backHome && <Redirect to="/" />}
       </Fragment>
     )
