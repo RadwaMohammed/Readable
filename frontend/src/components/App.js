@@ -17,16 +17,19 @@ class App extends Component {
     const { isLoading, categoryPath } = this.props;
     return isLoading 
       ? 
+      <Fragment>
+        <LoadingBar updateTime={100} maxProgress={95} progressIncrease={10} />
         <Container className="center-loader">
           <Spinner animation="grow" size="sm" />
-          <Spinner animation="grow"  size="sm"/>
+          <Spinner animation="grow" size="sm"/>
           <Spinner animation="grow" />
-          <Spinner animation="grow"  size="sm"/>
+          <Spinner animation="grow" size="sm"/>
           <Spinner animation="grow" size="sm" />
         </Container>
+      </Fragment>
       :
         <Fragment>
-          <LoadingBar updateTime={200} maxProgress={95} progressIncrease={100}  />
+          <LoadingBar updateTime={100} maxProgress={95} progressIncrease={10} />
           <Container>
             <MainRouter categoryPath={categoryPath} />
           </Container>
@@ -43,10 +46,10 @@ class App extends Component {
  *                    categoryPath {string} all possible category path
  *                    
  */
- const mapStateToProps = ({ categories }) => {
+ const mapStateToProps = ({ categories, loadingBar }) => {
   const catePathArr = Object.values(categories).map(category => category.path);
   return {
-    isLoading: !Object.keys(categories).length,
+    isLoading: !!loadingBar.default,
     categoryPath: catePathArr.join('|') 
   }
 };

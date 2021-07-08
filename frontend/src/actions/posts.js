@@ -151,10 +151,9 @@ export function handleAddPost(post) {
  * @param {Object} post - The updated post object
  */
 export function handleEditPost(id, post) {
-
   return async dispatch => {
+    dispatch(editPost(id, post));
     try {
-      dispatch(editPost(id, post));
       return await ReadableAPI.editPost(id, post);
     }
     catch (error) {
@@ -171,18 +170,19 @@ export function handleEditPost(id, post) {
  * @param {string} id - The post's id
  */
 export function handleDeletePost(id) {
-  return dispatch => {
+  return async dispatch => {
     // The post (parent) delete for its comment
     dispatch(deleteCommentParent(id));
     // Delete post
     dispatch(deletePost(id));
-    return ReadableAPI.deletePost(id)
-      .catch (error => {
-        dispatch(reAddPost(id));
-        dispatch(addCommentParent(id));
-        alert('An error occured. Please, try again.');
-        console.warn('Error occured:', error);
-      });
+    try {
+      return await ReadableAPI.deletePost(id);
+    } catch (error) {
+      dispatch(reAddPost(id));
+      dispatch(addCommentParent(id));
+      alert('An error occured. Please, try again.');
+      console.warn('Error occured:', error);
+    }
   }
 }
 
@@ -192,13 +192,14 @@ export function handleDeletePost(id) {
  * @param {string} option - The user's vote option
  */
 export function handleVotePost(id, option) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(votePost(id, option));
-    return ReadableAPI.votePost(id, option)
-      .catch (error => {
-        dispatch(resetVotePost(id, option));
-        alert('An error occured. Please, try again.');
-        console.warn('Error occured:', error);
-      });
+    try {
+      return await ReadableAPI.votePost(id, option);
+    } catch (error) {
+      dispatch(resetVotePost(id, option));
+      alert('An error occured. Please, try again.');
+      console.warn('Error occured:', error);
+    }
   }
 }

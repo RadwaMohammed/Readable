@@ -184,12 +184,16 @@ export function handleEditComment(id, comment) {
  */
 export function handleDeleteComment(id) {
   return async dispatch => {
-    dispatch(deleteComment(id));
+    // Before the request show loading bar
+    dispatch(showLoading());
     const deletedComment = await ReadableAPI.getComment(id);
+    dispatch(deleteComment(id));
     // Decrement parent post comment counter by 1
     dispatch(commentCounter(deletedComment.parentId, -1));
     try {
-      return ReadableAPI.deleteComment(id);
+      await ReadableAPI.deleteComment(id);
+      // Then hide the loading bar
+      return dispatch(hideLoading());
     } catch (error) {
       dispatch(reAddComment(id));
       // Increment parent post comment counter by 1
@@ -206,13 +210,14 @@ export function handleDeleteComment(id) {
  * @param {string} option - The user's vote option
  */
 export function handleVoteComment(id, option) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(voteComment(id, option));
-    return ReadableAPI.voteComment(id, option)
-      .catch (error => {
-        dispatch(resetVoteComment(id, option));
-        alert('An error occured. Please, try again.');
-        console.error('Error occured:', error);
-      });
+    try {
+      return await ReadableAPI.voteComment(id, option);
+    } catch (error) {
+      dispatch(resetVoteComment(id, option));
+      alert('An error occured. Please, try again.');
+      console.error('Error occured:', error);
+    }
   }
 }
