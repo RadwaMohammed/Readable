@@ -620,7 +620,7 @@ h1 {
 }
 
 .comments-wrapper .not-empty {
-  margin: 5% 0 0 5%;
+  margin: 0.5em 0 0 1em;
 }
 
 
@@ -901,9 +901,6 @@ h1 {
     margin-right: 5%;
   }
 
-  .comments-wrapper .not-empty {
-    margin: 3% 0 0;
-  }
 }
 
 

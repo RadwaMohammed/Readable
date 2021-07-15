@@ -4,24 +4,23 @@ import { FaTrashAlt } from 'react-icons/fa';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
-
 class DeleteBtn extends Component {
   state = {
     backHome: false
   }
-  /**
-  * Handle deletiong post
-  */
- remove = () => {
-  const { handleDelete, id, redirectHome } = this.props;
-  handleDelete(id);
-  if (redirectHome) {
-    this.setState({
-      backHome: true
-    })
-  }
   
-}
+  /**
+  * Handle deleting post
+  */
+  remove = () => {
+    const { handleDelete, id, redirectHome } = this.props;
+    handleDelete(id);
+    if (redirectHome) {
+      this.setState({
+        backHome: true
+      })
+    }
+  }
   render() {
     const { backHome } = this.state;
     return (

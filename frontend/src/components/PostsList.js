@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Post from './Post';
 
-export default function PostsList(props) {
+function PostsList(props) {
   const { posts } = props;
   const isAllPostsDeleted = posts.every(post => !!post.deleted);
   return (
@@ -13,8 +13,12 @@ export default function PostsList(props) {
               <Post post={post}/>
             </div>
           ))
-          : <p className="no-posts">There is no posts in this category.</p>
+          : <p className="no-posts">
+            There is no posts in this category.
+            </p>
       }
     </Fragment>
   )
 }
+
+export default PostsList;

@@ -27,6 +27,7 @@ class PostDetails extends Component {
   state={
     sortOption: 'timestamp-desc',
   }
+
   /**
    * Update the state with the user's sort option
    * @param {string} value - The sort option value
@@ -63,6 +64,7 @@ class PostDetails extends Component {
       id
     } = post;
     const { history } = this.props;
+
     return  myPost 
       ? 
       // Make sure that tha posts path in the right category
@@ -76,10 +78,16 @@ class PostDetails extends Component {
             <div className="post-wrapper">
               <div className="post-header">
                 <h2 className="detail-title">{title}</h2>
-                <Link className="category" to={`/${category}`}>{categoryIcons[category]}{category}</Link>
+                <Link className="category" to={`/${category}`}>
+                  {categoryIcons[category]}{category}
+                </Link>
               </div>
-              <span className="time">{formatDate(timestamp)}</span>
-              <span className="author">by <strong>{author}</strong></span>
+              <span className="time">
+                {formatDate(timestamp)}
+              </span>
+              <span className="author">
+                by <strong>{author}</strong>
+              </span>
               <div className="post-content-wrapper">
                 <div className="body-score-wrapper">
                   <div className="vote-btn">
@@ -107,7 +115,12 @@ class PostDetails extends Component {
                         {`  ${commentCount} comment${commentCount === 1 ? '' : 's'}`}
                       </button>
                       <div className="edit-delete-wrapper">
-                        <EditBtn id={id} currentData={post} handleEdit={handleEditPost} categories={categories} />
+                        <EditBtn 
+                          id={id} 
+                          currentData={post} 
+                          handleEdit={handleEditPost} 
+                          categories={categories} 
+                        />
                         <DeleteBtn handleDelete={handleDeletePost} id={id} redirectHome />
                       </div>
                     </div>
@@ -131,7 +144,6 @@ class PostDetails extends Component {
 
 }
 
-
 /**
  * The mapStateToProps function - get the state parts that PostDetails component needs
  * @param {Object} state - The state of the store 
@@ -139,9 +151,12 @@ class PostDetails extends Component {
  * @param {object} state.comments - The  comments slice of the state 
  * @param {Object} props - The component's ownProps
  * @returns {object} An object containing  
- *                      current post {object} 
+ *                      myPost is the post object{object} or undefined {undefined} if not found
+ *                      post {object} 
  *                      post's comments {array}
  *                      post's id {string}
+ *                      categories array {array}
+ *                      category in the current url {string}
  */
  const mapStateToProps = ({ posts, comments, categories }, props) =>{ 
   const { post_id, category } = props.match.params;
@@ -159,15 +174,14 @@ class PostDetails extends Component {
 
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
- * <handleAddPost> ction creator
- * <handleDeletePost> ction creator
-  * <handleEditPost> ction creator
+ * <handleAddPost> action creator
+ * <handleDeletePost> action creator
+  * <handleEditPost> action creator
  */
  const mapDispatchToProps = {
   handleVotePost,
   handleDeletePost,
   handleEditPost
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

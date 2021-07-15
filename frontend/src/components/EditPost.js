@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
-export default class EditPost extends Component {
+class EditPost extends Component {
   state={
     title: this.props.post.title,
     body: this.props.post.body,
     categoryName: this.props.post.category,
   }
+
   /**
    * Handle the change on the input text 
    * in the edit post form
-   * @param {e} e - event object 
+   * @param {object} e - The event object 
    */
    handleChange = e => {
     const { name, value } = e.target;
@@ -19,19 +20,29 @@ export default class EditPost extends Component {
       [name]: value
     });
   };
+
    /**
    * Handle the submit to edit post
    * @param {object} e - The event object 
    */
   handleSubmit = e => {
-    const { categoryName: category, title, body } = this.state;
+    const { 
+      categoryName: category, 
+      title, 
+      body 
+    } = this.state;
     const { handleEdit, post } = this.props;
-    const editedPost = { ...post, category, title, body, timestamp: Date.now()};
-    console.log(editedPost)
+    const editedPost = { 
+      ...post, 
+      category, 
+      title, 
+      body, 
+      timestamp: Date.now()
+    };
     e.preventDefault();
     handleEdit(editedPost);
-    
   }
+
   render() {
     const { 
       show, 
@@ -71,7 +82,8 @@ export default class EditPost extends Component {
                       name="categoryName"
                       checked={categoryName === category.name}
                       onChange={this.handleChange}
-                    />)
+                    />
+                  )
                 }
               </Form.Group>
               <Form.Group controlId="title">
@@ -114,3 +126,5 @@ export default class EditPost extends Component {
     )
   }
 }
+
+export default  EditPost;

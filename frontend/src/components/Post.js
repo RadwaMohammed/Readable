@@ -17,10 +17,6 @@ import VoteBtn from './VoteBtn';
 import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 
-
-
-
-
 class Post extends Component {
   render() {
     const categoryIcons = {
@@ -46,14 +42,25 @@ class Post extends Component {
       id, 
       deleted
     } = post;
+
     return !deleted &&
       <div className="post-wrapper">
         <div className="post-header">
-          <h2><Link className="title" to={`/${category}/${id}`}>{title}</Link></h2>
-          <Link className="category" to={`/${category}`}>{categoryIcons[category]}{category}</Link>
+          <h2>
+            <Link className="title" to={`/${category}/${id}`}>
+              {title}
+            </Link>
+          </h2>
+          <Link className="category" to={`/${category}`}>
+            {categoryIcons[category]}{category}
+          </Link>
         </div>
-        <span className="time">{formatDate(timestamp)}</span>
-        <span className="author">by <strong>{author}</strong></span>
+        <span className="time">
+          {formatDate(timestamp)}
+        </span>
+        <span className="author">
+          by <strong>{author}</strong>
+        </span>
         <div className="post-content-wrapper">
           <div className="body-score-wrapper">
             <div className="vote-btn">
@@ -67,7 +74,9 @@ class Post extends Component {
                 {
                   body.slice(0, 80).length !== body.length 
 
-                  && <Link className="more" to={`/${category}/${id}`}> ...more</Link>
+                  && <Link className="more" to={`/${category}/${id}`}>
+                       ...more
+                     </Link>
                 }
               </p>
               <div className="post-btns-wrapper">
@@ -76,19 +85,22 @@ class Post extends Component {
                   {`  ${commentCount} comment${commentCount === 1 ? '' : 's'}`}
                 </Link>
                 <div className="edit-delete-wrapper">
-                  <EditBtn id={id} currentData={post} handleEdit={handleEditPost} categories={categories} />
+                  <EditBtn 
+                    id={id} 
+                    currentData={post} 
+                    handleEdit={handleEditPost} 
+                    categories={categories} 
+                  />
                   <DeleteBtn handleDelete={handleDeletePost} id={id} />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      
-    
+      </div>  
   }
 }
+
 /**
  * The mapStateToProps function - get the state parts that Post component needs
  * @param {Object} state - The state of the store 
@@ -99,18 +111,16 @@ class Post extends Component {
   categories: Object.values(categories),
 });
 
-
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
- * <handleVotePost> ction creator
- * <handleDeletePost> ction creator
- * <handleEditPost> ction creator
+ * <handleVotePost> action creator
+ * <handleDeletePost> action creator
+ * <handleEditPost> action creator
  */
  const mapDispatchToProps = {
   handleVotePost,
   handleDeletePost,
   handleEditPost
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

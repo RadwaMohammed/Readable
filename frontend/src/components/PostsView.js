@@ -10,6 +10,7 @@ class PostsView extends Component {
   state={
     sortOption: 'timestamp-desc'
   }
+
   /**
    * Update the state with the user's sort option
    * @param {string} value - The sort option value
@@ -21,6 +22,7 @@ class PostsView extends Component {
     const { posts } = this.props;
     // Sort posts depending on user's option
     const sortedPosts = sortBy(posts, sortOption);
+
     return (
       <Fragment>
         <Categories />
@@ -50,6 +52,6 @@ class PostsView extends Component {
   return {
     posts: myPosts,
   }
-  
 };
+
 export default connect(mapStateToProps)(PostsView);

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleVoteComment, handleDeleteComment, handleEditComment } from '../actions/comments';
+import { 
+  handleVoteComment, 
+  handleDeleteComment, 
+  handleEditComment 
+} from '../actions/comments';
 import { formatDate } from '../utils/helper';
 import VoteBtn from './VoteBtn';
 import DeleteBtn from './DeleteBtn';
@@ -20,6 +24,7 @@ class Comment extends Component {
       show: true
     });
   }
+
   /**
    * Hide edit comment form
    */
@@ -28,6 +33,7 @@ class Comment extends Component {
       show: false
     });
   }
+
   /**
    * Handle Editing comment
    * @param {string} commentId - The comment's id
@@ -38,6 +44,7 @@ class Comment extends Component {
     handleEditComment(commentId, comment);
     this.hideEditForm();
   };
+
   render() {
     const { 
       comment, 
@@ -86,17 +93,17 @@ class Comment extends Component {
       </div>   
   }
 }
+
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
- * <handleVoteComment> ction creator
- * <handleDeleteComment> ction creator
- * <handleEditComment> ction creator
+ * <handleVoteComment> action creator
+ * <handleDeleteComment> action creator
+ * <handleEditComment> action creator
  */
  const mapDispatchToProps = {
   handleVoteComment, 
   handleDeleteComment,
   handleEditComment
 };
-
 
 export default connect(null, mapDispatchToProps)(Comment);

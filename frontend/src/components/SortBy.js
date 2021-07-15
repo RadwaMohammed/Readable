@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
- import { MdUnfoldMore }  from 'react-icons/md';
+import { MdUnfoldMore }  from 'react-icons/md';
+
 class SortBy extends Component {
   state={
     value: ""
@@ -21,6 +22,7 @@ class SortBy extends Component {
       }
     ); 
   }
+
   render() {
     const {value} = this.state;
     return (
@@ -32,9 +34,12 @@ class SortBy extends Component {
           <option value="voteScore-desc">High Score</option>
           <option value="voteScore-asc">Low Score</option>
         </select>
-        <span className="arrow"><MdUnfoldMore className='sort-icon'/></span>
+        <span className="arrow">
+          <MdUnfoldMore className='sort-icon'/>
+        </span>
       </div>
     )
   }
 }
+
 export default SortBy;

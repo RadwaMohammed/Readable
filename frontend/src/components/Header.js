@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaReadme } from "react-icons/fa";
+import { FaReadme } from 'react-icons/fa';
 
 function Header() {
   return (
@@ -11,4 +11,5 @@ function Header() {
     </h1>
   )
 }
+
 export default Header;

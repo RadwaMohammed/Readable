@@ -2,7 +2,7 @@ import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
 
-export default function LoadingSpinner() {
+function LoadingSpinner() {
   return (
     <Container className="center-loader">
       <Spinner animation="grow" size="sm" />
@@ -13,3 +13,5 @@ export default function LoadingSpinner() {
     </Container>
   )
 }
+
+export default LoadingSpinner;

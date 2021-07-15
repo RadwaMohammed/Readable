@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
-import { MdFormatListBulleted } from "react-icons/md";
+import { MdFormatListBulleted } from 'react-icons/md';
 import { SiReact, SiRedux, SiUdacity } from "react-icons/si";
-
 
 class Categories extends Component {
   render() {
@@ -39,8 +38,7 @@ class Categories extends Component {
               </Nav.Link>
             </Nav.Item>
           )
-        }
-        
+        }  
       </Nav>
     )
   }
@@ -55,6 +53,5 @@ class Categories extends Component {
  const mapStateToProps = ({ categories }) => ({
   categories: Object.values(categories),
 });
-
 
 export default connect(mapStateToProps)(Categories);

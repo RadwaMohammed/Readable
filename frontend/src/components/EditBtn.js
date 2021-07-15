@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import EditPost from './EditPost';
+
 class EditBtn extends Component {
   state = {
     show: false,
   }
+
   /**
    * Show Edit form
    */
@@ -17,6 +19,7 @@ class EditBtn extends Component {
       showEditForm();
     }
   }
+
   /**
    * Hide Edit form
    */
@@ -41,7 +44,9 @@ class EditBtn extends Component {
     const { currentData, categories, commentEdit } = this.props;
     return (
       <Fragment>
-        <button className="edit-btn" onClick={() => this.showEditModal()}><FaEdit /> Edit</button>
+        <button className="edit-btn" onClick={() => this.showEditModal()}>
+          <FaEdit /> Edit
+        </button>
         {
           (show && !commentEdit) 
             &&
@@ -58,4 +63,5 @@ class EditBtn extends Component {
     )
   }
 }
+
 export default EditBtn;

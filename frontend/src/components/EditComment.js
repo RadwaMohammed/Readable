@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 
-export default class EditComment extends Component {
+class EditComment extends Component {
   state={
     comment: this.props.comment.body,
   }
+
   /**
    * Handle the change on the input text 
    * in the edit form
-   * @param {e} e - event object 
+   * @param {object} e - The event object 
    */
    handleChange = e => {
     const { id, value } = e.target;
@@ -16,6 +17,7 @@ export default class EditComment extends Component {
       [id]: value
     });
   };
+
    /**
    * Handle the submit to add new post
    * @param {object} e - The event object 
@@ -27,6 +29,7 @@ export default class EditComment extends Component {
     e.preventDefault();
     handleEdit(comment.id, editedComment);
   }
+
   render() {
     const { comment } = this.state;
     const { hide } = this.props;
@@ -54,9 +57,10 @@ export default class EditComment extends Component {
             </button>
           </div>
           <p className="not-empty">{!comment.trim() ? 'You must fill the input field.' : ''}</p>
-        </div>
-        
+        </div> 
       </Form>
     )
   }
 }
+
+export default EditComment;

@@ -60,11 +60,10 @@ class App extends Component {
 
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
- * <handleInitialData> ction creator
+ * <handleInitialData> action creator
  */
 const mapDispatchToProps = {
   handleInitialData
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleAddComment } from '../actions/comments';
-import { MdAdd } from "react-icons/md";
+import { MdAdd } from 'react-icons/md';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -11,10 +11,11 @@ class AddComment extends Component {
     commentAuthor: '',
     comment: '' 
   };
+
   /**
    * Handle the change on the input text 
    * in the add a commet form
-   * @param {e} e - event object 
+   * @param {object} e - event object 
    */
    handleChange = e => {
     const { id, value } = e.target;
@@ -27,7 +28,7 @@ class AddComment extends Component {
    * Handle the submit to add new post
    * @param {object} e - The event object 
    */
-   handleSubmit = e => {
+  handleSubmit = e => {
     const { commentAuthor: author, comment: body } = this.state;
     const { handleAddComment, postId: parentId } = this.props;
     const comment = { author, body, parentId };
@@ -38,6 +39,7 @@ class AddComment extends Component {
       comment: ''
     });
   }
+
   render() {
     const { commentAuthor, comment } = this.state;
     const isEmpty = !commentAuthor.trim() || !comment.trim();
@@ -59,7 +61,6 @@ class AddComment extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Group>
-              
                 <Form.Group controlId="comment">
                   <Form.Label>Comment</Form.Label>
                   <Form.Control 
@@ -85,13 +86,13 @@ class AddComment extends Component {
     )
   }
 }
+
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
- * <handleAddComment> ction creator
+ * <handleAddComment> action creator
  */
  const mapDispatchToProps = {
   handleAddComment,
 };
-
 
 export default connect(null, mapDispatchToProps)(AddComment);

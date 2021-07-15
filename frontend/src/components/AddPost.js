@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import  { handleAddPost } from '../actions/posts';
-import { BsArrowReturnLeft } from "react-icons/bs";
+import { BsArrowReturnLeft } from 'react-icons/bs';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 
@@ -16,7 +16,7 @@ class AddPost extends Component {
   /**
    * Handle the change on the input text 
    * in the add new post form
-   * @param {e} e - event object 
+   * @param {object} e - event object 
    */
   handleChange = e => {
     const { name, value } = e.target;
@@ -52,7 +52,6 @@ class AddPost extends Component {
       title, 
       body 
     } = this.state;
-
     const isEmpty = Object.values(this.state).some(val => !val.trim());
     return (
       <Fragment>
@@ -120,7 +119,13 @@ class AddPost extends Component {
               >
                 Add Post
               </button>
-              <button type="button" className="cancel-btn" onClick={history.goBack}>Cancel</button>
+              <button 
+                type="button" 
+                className="cancel-btn" 
+                onClick={history.goBack}
+              >
+                Cancel
+              </button>
             </div>
           </Form>
         </Container>
@@ -141,11 +146,10 @@ class AddPost extends Component {
 
 /**
  * The mapDispatchToProps as an object - dispatching actions to the store
- * <handleAddPost> ction creator
+ * <handleAddPost> action creator
  */
  const mapDispatchToProps = {
   handleAddPost
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
