@@ -13,10 +13,8 @@ export default function PostsList(props) {
               <Post post={post}/>
             </div>
           ))
-          : <p>There is no posts</p>
+          : <p className="no-posts">There is no posts in this category.</p>
       }
-
-
     </Fragment>
   )
 }

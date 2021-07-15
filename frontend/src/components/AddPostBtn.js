@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import { FaPlus} from "react-icons/fa";
+import { MdAdd } from "react-icons/md";
 
 
 function AddPostBtn(props) {
@@ -10,9 +9,11 @@ function AddPostBtn(props) {
     const { history } = props;
     history.push('/posts/add');
   };
-
+  
   return (
-    <Button variant="success" onClick={addNewPost}><FaPlus />  Add New Post</Button>
+    <div className="add-post-btn-wrapper">
+      <button onClick={addNewPost}><MdAdd className="add-post-icon" />Add New Post</button>
+    </div>
   )
 }
 export default  withRouter(AddPostBtn);

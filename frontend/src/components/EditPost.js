@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 export default class EditPost extends Component {
@@ -52,14 +51,15 @@ export default class EditPost extends Component {
         backdrop="static"
         keyboard={false}
         centered
+        className="edit-post-modal"
       >
         <Form onSubmit={this.handleSubmit}>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>Edit post</Modal.Title>
           </Modal.Header>
           <Modal.Body>
               <Form.Group controlId="category">
-                <Form.Label>Choose a category</Form.Label>
+                <Form.Label>Category</Form.Label>
                 {
                   categories.map(category => 
                     <Form.Check
@@ -78,7 +78,7 @@ export default class EditPost extends Component {
                 <Form.Label>Title</Form.Label>
                 <Form.Control 
                   type="text" 
-                  placeholder="Type a title"
+                  placeholder="Type the title"
                   value={title} 
                   name="title"
                   onChange={this.handleChange}
@@ -95,18 +95,19 @@ export default class EditPost extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Group>
-              
-
+              <p className="not-empty">
+                {isEmpty ? 'All input fields must be filled out.' : ''}
+              </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button 
-                variant="primary" 
-                type="submit"
-                // Make sure that the user enter text not only white space
-                disabled={isEmpty}
-              >
-                Save
-              </Button>
+            <button 
+              type="submit"
+              // Make sure that the user enter text not only white space
+              disabled={isEmpty}
+            >
+              Save
+            </button>
+            <button type="button" className="cancel-btn" onClick={()=> hide()}>Cancel</button>  
           </Modal.Footer>
         </Form>
       </Modal>

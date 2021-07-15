@@ -27,20 +27,21 @@ class DeleteBtn extends Component {
     return (
       <Fragment>
         <OverlayTrigger 
-          trigger="click" 
-          placement="right" 
+          trigger='click' 
+          placement='top'
           overlay={
-            <Popover id="popover-basic">
+            <Popover id="popover-positioned-top" className="delete-popover">
               <Popover.Title as="h5">Delete</Popover.Title>
               <Popover.Content>
                 Are you sure?
+                <br />
                 <button onClick={() => document.body.click()}>No</button> 
                 <button onClick={() => this.remove()}>Yes</button>
               </Popover.Content>
             </Popover>
           }
           rootClose={true}>
-          <button><FaTrashAlt /></button>
+          <button className="delete-btn"><FaTrashAlt /> Delete</button>
         </OverlayTrigger>
         {backHome && <Redirect to="/" />}
       </Fragment>

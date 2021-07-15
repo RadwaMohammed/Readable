@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import { FaChevronUp, FaChevronDown} from "react-icons/fa";
+import { MdArrowDropUp, MdArrowDropDown} from "react-icons/md";
 
 function VoteBtn(props) {
   /**
@@ -12,9 +12,9 @@ function VoteBtn(props) {
   }
   return (
     <Fragment>
-      <button onClick={() => vote('upVote')}><FaChevronUp /></button>
+      <button className="vote-icon-wrapper" onClick={() => vote('upVote')}><MdArrowDropUp className="vote-icon" /></button>
         { props.children }
-      <button onClick={() => vote('downVote')}><FaChevronDown /></button>
+      <button className="vote-icon-wrapper" onClick={() => vote('downVote')}><MdArrowDropDown className="vote-icon" /></button>
     </Fragment>
   )
 }

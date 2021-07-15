@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { handleInitialData } from '../actions/shared';
 import MainRouter from './MainRouter';
-import Spinner from 'react-bootstrap/Spinner';
 import Container from 'react-bootstrap/Container';
+import LoadingSpinner from './LoadingSpinner';
 
 class App extends Component {
   componentDidMount() {
@@ -18,19 +18,23 @@ class App extends Component {
     return isLoading 
       ? 
       <Fragment>
-        <LoadingBar updateTime={100} maxProgress={95} progressIncrease={10} />
-        <Container className="center-loader">
-          <Spinner animation="grow" size="sm" />
-          <Spinner animation="grow" size="sm"/>
-          <Spinner animation="grow" />
-          <Spinner animation="grow" size="sm"/>
-          <Spinner animation="grow" size="sm" />
-        </Container>
+        <LoadingBar 
+          updateTime={200} 
+          maxProgress={100} 
+          progressIncrease={100} 
+          style={{ backgroundColor: '#415a6b', height: '5px' }} 
+        />
+        <LoadingSpinner />
       </Fragment>
       :
         <Fragment>
-          <LoadingBar updateTime={100} maxProgress={95} progressIncrease={10} />
-          <Container>
+          <LoadingBar 
+            updateTime={200} 
+            maxProgress={100} 
+            progressIncrease={100} 
+            style={{ backgroundColor: '#415a6b', height: '5px' }} 
+          />
+          <Container className="app-container">
             <MainRouter categoryPath={categoryPath} />
           </Container>
         </Fragment>

@@ -1,14 +1,49 @@
+html {
+  --scrollbarBG: #f7f6e7;
+  --thumbBG: #476072;
+  overflow: hidden;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Yantramanav', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f6e7;
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  height: 100vh;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 0.25rem;
+  border: 3px solid var(--scrollbarBG);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f6e7; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #476072; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334257; 
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -20,18 +55,1033 @@ code {
   left: 50%;
   margin-top: -3rem;
   margin-left: -4rem;
-
 }
 
-/* Header Component */
-.header-link {
-  display: block;
-  margin: 1em auto;
+.center-loader .spinner-grow {
+  color:#415a6b;
+  background-image: -o-radial-gradient(circle, #334257, #f7f6e7, #415a6b);
+  background-image: radial-gradient(circle, #334257, #f7f6e7, #415a6b);
+}
+
+
+/*------------- Header Component -------------*/
+h1 {
+  margin: 0 auto 0.75em;
+  padding: 0.5em 0;
+  border-bottom: 1px dashed #334257;
   text-align: center;
 }
+
+.header-link {
+  font-family: "Merienda", cursive;
+  font-size: 2rem;
+  color: #334257;
+  font-weight: bold;
+}
+
 .header-link:hover {
   text-decoration: none;
+  color: #476072;
 }
-.home-icon {
+
+.header-icon {
+  margin-top: -0.1em;
+  font-size: 1.4em;
+  margin-right: 0.1em;
+}
+
+
+/*------------- Categories Component -------------*/
+.nav-link {
+  color: #334257;
+  border: 1px solid transparent;
+  margin: 0.3em;
+  font-size: 1.05rem;
+  text-transform: capitalize;
+  letter-spacing: 0.05rem;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.nav-item a.nav-link:hover {
+  color: #435c6d;
+  border: 1px solid #334257;
+}
+
+.nav-item a.nav-link.active,
+.nav-item a.nav-link.active:hover {
+  background-color: #334257;
+  color: #f7f6e7;
+  border: 1px solid #334257;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  margin-bottom: 0.25em;
+  margin-right: 0.2em;
+}
+
+
+/*------------- AddPostBtn Componnent -------------*/
+.add-post-btn-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.add-post-btn-wrapper button {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+  background-color: #334257;
+  color: #f7f6e7;
+  -webkit-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+.add-post-btn-wrapper button:hover {
+  background-color: #476072;
+}
+
+.add-post-icon {
+  font-size: 1.3rem;
+  margin-bottom: 0.1em;
+  margin-right: 0.1em;
+}
+
+
+/*------------- SortBy Component -------------*/
+.sort-wrapper {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.sort-wrapper select {
+  font-size: 0.9rem;
+  padding: 0.5em 3em 0.5em 1em;
+  background-color: #f7f6e7;
+  color: #334257;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border-radius: 0.25rem;
+  width: 9rem;
+}
+
+.sort-wrapper select:hover {
+  background-color: #e7e6e1;
+}
+
+.sort-wrapper select option:disabled {
+  color: #aaa;
+  margin: 1em;
+}
+
+.sort-wrapper .arrow {
+  background-color: #476072;
+  display: block;
+  height: 100%;
+  padding: 0.3em;
+  position: absolute;
+  top: 0;
+  left: 7.1rem;
+  pointer-events: none;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.sort-icon {
+  font-size: 1.5rem;
+  color: #f7f6e7;
+}
+
+
+/*------------- PostView component -------------*/
+.posts-list-wrapper {
+  background-color: #334257;
+  border-radius: 0.25rem;
+  margin: 1em auto 1.5em;
+  padding: 1.5em 2em;
+}
+
+
+/*------------- Post component -------------*/
+.post-wrapper {
+  padding: 2em 2em 0.5em;
+  border-radius: 0.25rem;
+  background-color: #f7f6e7;
+  margin-top: 2.7em;
+}
+
+.post-wrapper a:hover {
+  text-decoration: none;
+}
+
+.post-header {
+  position: relative;
+}
+
+.post-header .category:hover {
+  background-color: #334257;
+}
+
+.post-wrapper .title,  
+.post-wrapper .detail-title{
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: #334257;
+  display: block;
+  margin-top: -1%;
+  width:80%;
+}
+
+.post-header .title:hover {
+  text-decoration: underline;
+}
+
+.post-wrapper .category {
+  background-color: #476072;
+  font-size: 1rem;
+  color: #f7f6e7;
+  text-align: center;
+  width:25%;
+  padding: 0.4em;
+  border-bottom-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  text-transform: capitalize;
+  position: absolute;
+  right: -2.5em;
+  top: -2.5em;
+  border: 1px solid #f7f6e7;
+}
+
+.post-wrapper .category-icon {
+  margin: 0 0.2em 0.2em 0;
+}
+
+.post-wrapper .time,
+.post-wrapper .author, 
+.comment-footer .time,
+.comment-footer .author {
+  font-size: 0.8125rem;;
+  margin-top: -0.6em;
+  display: block;
+  color: #8496a4;
+}
+
+.post-wrapper .author, 
+.comment-footer .author {
+  margin-top: 0;
+  color:#476072;
+}
+
+.post-content-wrapper {
+  padding: 1em 0.5em 1em;
+  border-top: 1px dashed #476072;
+  margin-top: 1em;
+}
+  
+.body-score-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+}
+
+.post-wrapper .content {
+  font-size: 1rem;
+  color: #476072;
+  word-break: break-all;
+  width: 95%;
+  border-left: 1px dashed #476072;
+  padding-left: 1em;
+}
+
+.post-wrapper .content .more {
+  color: #476072;
+  font-size: 0.9rem;
+  background-color: #e7e6e1;
+  padding: 0.1em 0.25em;
+  border-radius: 0.25rem;
+  -webkit-transform: color 0.5s;
+      -ms-transform: color 0.5s;
+          transform: color 0.5s;
+}
+
+.post-wrapper .content .more:hover {
+  color: #334257;
+  text-decoration: underline;
+}
+
+
+/*------------- VoteBtn component -------------*/
+.post-wrapper .vote-btn, 
+.comment-container .vote-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 0.25rem;
+  width: 5%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 1em;
+  height: 100%;
+  color: #476072;
+}
+
+.vote-icon-wrapper {
+  border: none;
+  background-color: #476072;
+  border-radius: 2px;
+  padding: 0 0.3em 0.15em
+}
+
+.vote-icon-wrapper:hover {
+  background-color: #334257;
+}
+
+.vote-icon {
+  font-size: 1.3em;
+  color:#f7f6e7;
+}
+
+.post-btns-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.comments-link {
+  font-size: 0.85rem;
+  color: #476072;
+  background-color: transparent;
+  border: none;
+}
+
+.post-btns-wrapper .comments-link:hover {
+  text-decoration: underline;
+  color:#334257;
+}
+
+.delete-btn, 
+.edit-btn {
+  border: 1px solid #476072;
+  border-radius: 0.25rem;
+  margin-left: 0.7em;
+  color: #476072;
+  background-color: #f7f6e7;
+  font-size: 0.85rem;
+  width: 5em;
+  padding: 0.1em 0;
+}
+
+.delete-btn:hover, 
+.edit-btn:hover{
+  border: 1px solid #334257;
+  color: #334257;
+  background-color: #e7e6e1;
+}
+
+.post-btns-wrapper .btn-icon {
+  margin-bottom: 0.1em;
+}
+
+.delete-popover .popover-header {
+  color: #f7f6e7;
+  background-color: #334257;
+  border-bottom: 1px solid #334257;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.delete-popover .popover-body {
+  background-color: #e7e6e1;
+  color: #334257;
+  font-size: 0.9rem;
+}
+
+.bs-popover-auto[x-placement^=top]>.arrow::after, 
+.bs-popover-top>.arrow::after {
+  border-top-color: #e7e6e1; 
+}
+
+.delete-popover button {
+  border: 1px solid #435c6d;
+  margin: 0.7em 0.4em;
+  padding: 0.1em 0.7em;
+  color: #435c6d;
+  font-size: 0.85rem;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.delete-popover button:hover {
+  background-color: #f7f6e7;
+}
+
+.delete-popover button:last-child {
+  background-color: #435c6d;
+  color: #f7f6e7
+}
+
+.delete-popover button:last-child:hover {
+  background-color: #f7f6e7;
+  color: #435c6d;
+}
+
+
+/*------------- PostsList component -------------*/
+.no-posts {
+  color:#f7f6e7;
+  font-size: 1rem;
+  height: 30vh;
+  padding: 4em;
+  text-align: center;
+}
+
+
+/*------------- PostDetails component -------------*/
+.detail-wrapper, 
+.add-post-wrapper {
+  background-color: #334257;
+  padding: 1em 2em 0;
+  border-radius: 0.25rem;
+  margin: 2em 0 1.5em;
+}
+
+.back-btn {
+  background-color: #334257;
+  color: #f7f6e7;
+  border: 1px solid #334257;
+  border-radius: 0.25rem;
+  padding: 0.4em 1em;
+  font-size: 0.9rem;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.back-btn:hover {
+  background-color: #476072;
+}
+
+.comments-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  width: 95%;
+  color: #f7f6e7;
+  padding: 1em 0 0.5em;
+  border-bottom: 1px dashed #f7f6e7;
+}
+
+.comments-wrapper {
+  padding: 1.5em 2em 2em;
+}
+
+/*------------- AddComment component -------------*/
+.detail-wrapper .accordion {
+  margin: 2em 0;
+  width: 80%;
+}
+
+.detail-wrapper .accordion>.card>.card-header {
+  background-color: #f7f6e7;
+  border: none;
+  color: #334257;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.detail-wrapper .card-header .add-comment-icon {
+  font-size: 1.1rem;
+  margin-top: -0.1em;
+}
+
+.detail-wrapper .not-empty {
+  color: #415a6b;
+  font-size: 0.85rem;
+  height: 1em;
+}
+
+.detail-wrapper .accordion button {
+  border: 1px solid #415a6b;
+  border-radius: 0.25rem;
+  padding: 0.5em 1.2em;
+  background-color: #415a6b;
+  color: #f7f6e7; 
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.detail-wrapper .form-label {
+  color: #334257;
+}
+
+
+/*------------- Comment component -------------*/
+.comment-container {
+  background-color: #f7f6e7;
+  border-radius: 0.25rem;
+  margin: 1.5em 0;
+  padding: 1.25em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.comment-container .content {
+  font-size: 1rem;
+  color: #476072;
+  width: 95%;
+  border-left: 1px dashed #476072;
+  padding-left: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.comment-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+
+/*------------- CommentsList component -------------*/
+.no-comments {
+  color:#f7f6e7;
+  margin-top: 2.5em;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/*EditComment component */
+.comment-container .comment-btns-container button {
+  border-radius: 0.25rem;
+  border: 1px solid #476072;
+  background-color: #476072;
+  color: #f7f6e7;
+  padding: 0 0.7em;
+  font-size: 1rem;
+  margin-left: 5%;
+  width: 5em;
+}
+
+.comment-container .content form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+}
+
+.comment-container .content .form-group {
+  width: 70%;
+}
+
+.comment-btns-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.comments-wrapper .not-empty {
+  margin: 5% 0 0 5%;
+}
+
+
+/*------------- EditPost component -------------*/
+.edit-post-modal .modal-content {
+  background-color: #f7f6e7;
+  color:#415a6b;
+  border: none;
+}
+
+.edit-post-modal .modal-header {
+  background-color: #334257;
+  color: #f7f6e7;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: none;
+  
+}
+.edit-post-modal .modal-header div.h4 {
+  font-size: 1.35rem;
+  font-weight: bold;
+} 
+
+.edit-post-modal .form-group {
+  margin: 5% 7%;
+}
+
+.edit-post-modal .form-label, 
+.add-post-wrapper .form-label {
+  color: #f7f6e7;
+  font-size: 1rem;
+  background-color: #415a6b;
+  display: block;
+  padding: 0.2em 0.6em;
+  margin-bottom: 0.5em;
+}
+
+.edit-post-modal .form-label:first-child {
+  margin-top: 0;
+}
+
+.edit-post-modal .form-control,
+.edit-post-modal .form-check,
+.detail-wrapper .form-control,
+.add-post-wrapper .form-control, 
+.add-post-wrapper .form-check {
+  color: #415a6b;
+  font-size: 0.95rem;
+}
+
+.edit-post-modal .form-control:focus,
+.edit-post-modal .form-check:focus,
+.detail-wrapper .form-control:focus, 
+.comment-container .form-control:focus, 
+.add-post-wrapper .form-control:focus {
+  border-color: #415a6b;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(65, 90, 107, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(65, 90, 107, 0.25);
+}
+
+.edit-post-modal .modal-footer>* {
+  margin: 0;
+}
+
+.edit-post-modal .modal-footer {
+  border: none;
+  padding: 0 3em 1.5em;
+  margin-top: -2.5%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.edit-post-modal .modal-footer button, 
+.add-post-wrapper button {
+  border: 1px solid #415a6b;
+  border-radius: 0.25rem;
+  width: 6em;
+  padding: 0.3em 0.3em 0.2em;
+  background-color: #415a6b;
+  color: #f7f6e7; 
+  margin-right: 0.7em;
+  font-size: 1rem;
+}
+
+.edit-post-modal .modal-footer .cancel-btn, 
+.comment-container .comment-btns-container .cancel-btn,
+.add-post-wrapper .cancel-btn {
+  color: #415a6b;
+  background-color: #f7f6e7;
+}
+
+.edit-post-modal .modal-footer button:hover, 
+.detail-wrapper .accordion button:hover, 
+.comment-container .comment-btns-container button:hover, 
+.add-post-wrapper button:hover {
+  background-color: #334257;
+}
+
+.edit-post-modal .modal-footer .cancel-btn:hover, 
+.comment-container .comment-btns-container .cancel-btn:hover, 
+.add-post-wrapper .cancel-btn:hover {
+  background-color: #e7e6e1;
+}
+
+.edit-post-modal .not-empty,
+.add-post-wrapper .not-empty {
+  margin: -2% 7% 1%;
+  color: #415a6b;
+  font-size: 0.85rem;
+  height: 1em;
+}
+
+.edit-post-modal ::-webkit-input-placeholder,
+.detail-wrapper ::-webkit-input-placeholder, 
+.comment-container ::-webkit-input-placeholder, 
+.add-post-wrapper ::-webkit-input-placeholder { 
+  color: #9aaab6;
+}
+
+.edit-post-modal ::-moz-placeholder,
+.detail-wrapper ::-moz-placeholder, 
+.comment-container ::-moz-placeholder, 
+.add-post-wrapper ::-moz-placeholder { 
+ color: #9aaab6;
+ opacity:  1;
+}
+
+.edit-post-modal :-ms-input-placeholder, 
+.detail-wrapper :-ms-input-placeholder, 
+.comment-container :-ms-input-placeholder, 
+.add-post-wrapper :-ms-input-placeholder {
+ color: #9aaab6;
+}
+
+.edit-post-modal ::-ms-input-placeholder, 
+.detail-wrapper ::-ms-input-placeholder, 
+.comment-container ::-ms-input-placeholder,
+.add-post-wrapper ::-ms-input-placeholder { 
+ color: #9aaab6;
+}
+
+.edit-post-modal ::-webkit-input-placeholder, .detail-wrapper ::-webkit-input-placeholder, .comment-container ::-webkit-input-placeholder, .add-post-wrapper ::-webkit-input-placeholder { 
+ color: #9aaab6;
+}
+
+.edit-post-modal ::-moz-placeholder, .detail-wrapper ::-moz-placeholder, .comment-container ::-moz-placeholder, .add-post-wrapper ::-moz-placeholder { 
+ color: #9aaab6;
+}
+
+.edit-post-modal :-ms-input-placeholder, .detail-wrapper :-ms-input-placeholder, .comment-container :-ms-input-placeholder, .add-post-wrapper :-ms-input-placeholder { 
+ color: #9aaab6;
+}
+
+.edit-post-modal ::-ms-input-placeholder, .detail-wrapper ::-ms-input-placeholder, .comment-container ::-ms-input-placeholder, .add-post-wrapper ::-ms-input-placeholder { 
+ color: #9aaab6;
+}
+
+.edit-post-modal ::placeholder,
+.detail-wrapper ::placeholder,
+.comment-container ::placeholder,
+.add-post-wrapper ::placeholder { 
+ color: #9aaab6;
+}
+
+
+/*------------- AddPost component -------------*/
+.add-post-wrapper {
+  padding: 1em 2em 1em;
+}
+
+.add-post-wrapper h2 {
+  color: #f7f6e7;
+  font-size: 1.35rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em 0 1em;
+  border-bottom: 1px dashed;
+}
+
+.add-post-wrapper form {
+  background-color: #f7f6e7;
+  color: #476072;
+  padding: 2em 2.5em;
+  border-radius: 0.25rem;
+  margin: 2em auto;
+ 
+}
+
+.add-post-wrapper .form-group {
+  margin-bottom: 1.5em;
+}
+
+.add-post-wrapper .not-empty {
+  margin: -0.4em 0 1em;
+}
+
+.add-post-wrapper button {
+  margin-left: 0;
+  margin-right: 0.6em;
+  cursor: pointer;
+}
+
+
+/*------------- NotFound componenet -------------*/
+.not-found {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Merienda';
+  font-size: 1.4rem;
+  padding: 2em;
+  color: #334257;
+  font-weight: bold;
+  margin: 0em;
+  height: 11em;
+}
+
+.not-found .icon {
+  font-size: 1.7rem;
   margin-top: -0.2em;
+  margin-right: 0.2em;
+}
+
+
+/*------------- For Responsive design -------------*/
+@media screen and (max-width: 48rem) {
+  div.app-container div.categories-nav {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-bottom: 1.5em;
+  }
+
+  .btns-not-empty-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    padding-bottom: 1.5em;
+  }
+
+  .comment-container .content {
+    padding-left: 5%
+  }
+
+  .comment-container .content form {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .comment-container .content .form-group {
+    width: 100%;
+  }
+
+  .comment-container .comment-btns-container button {
+    margin-left: 0;
+    margin-right: 5%;
+  }
+
+  .comments-wrapper .not-empty {
+    margin: 3% 0 0;
+  }
+}
+
+
+@media screen and (max-width: 33rem) {
+  .post-wrapper .title, 
+  .post-wrapper .detail-title {
+    font-size: 1.25rem;
+  }
+
+  .post-btns-wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .no-posts {
+    padding: 4em 1em;
+  }
+
+  .comments-link {
+    margin-bottom: 1em;
+  }
+
+  .post-wrapper .category {
+    font-size: 0.95rem;
+    width: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0.6em 0.8em;
+  }
+
+  .post-wrapper .vote-btn, 
+  .comment-container .vote-btn {
+    width: 10%;
+  }
+
+  .post-wrapper .content, 
+  .comment-container .content {
+    padding-left: 5%;
+  }
+
+  .comment-footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-top: 1em;
+  }
+
+  .comment-footer .delete-btn, 
+  .comment-footer .edit-btn {
+    margin: 1em 0.7em 0 0;
+  }
+
+  .detail-wrapper .accordion>.card>.card-header {
+    font-size: 0.95rem;
+    padding: 0.5em 0.5em 0.5em 1em;
+  }
+
+  .comments-wrapper {
+    padding: 1.5em 0 2em;
+  }
+
+  .edit-post-modal .modal-body {
+    padding: 1em 0.5em;
+  }
+
+  .edit-post-modal .modal-footer {
+    padding: 0 2.5em 1.5em;
+  }
+
+  .add-post-wrapper form {
+    padding: 2em 1.5em;
+  }
+}
+
+
+@media screen and (max-width: 26.6rem) {
+  .post-wrapper {
+    padding: 1em 1em 0.25em;
+  }
+
+  .post-wrapper .category {
+    font-size: 0.85rem;
+    padding: 0.4em 0.6em;
+  }
+
+  .posts-list-wrapper {
+    padding: 1.5em;
+  }
+
+  .comment-footer .delete-btn, 
+  .comment-footer .edit-btn {
+    margin: 0.2em;
+  }
+
+ .delete-btn, .edit-btn {
+    width: 100%;
+    margin: 0.2em;
+  }
+
+  .btns-not-empty-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .comment-btns-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 50%;
+  }
+
+  .comment-container .comment-btns-container button {
+    padding: 0.3em;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-top: 0.5em;
+  }
+
+  .edit-post-modal .modal-footer {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .edit-post-modal .form-label, 
+  .add-post-wrapper .form-label {
+    text-align: center;
+  }
+
+  .add-post-wrapper {
+    padding: 1em;
+  }
+
+  .add-btns-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .add-post-wrapper .add-btns-wrapper button, 
+  .edit-post-modal form .modal-footer button {
+    margin-top: 0.5em;
+  }
+
+  .detail-wrapper .accordion {
+    width: 100%;
+  }
+
+  .detail-wrapper .accordion button {
+    display: block;
+    margin: 1.8em auto 0.8em;
+    width: 100%;
+  }
 }

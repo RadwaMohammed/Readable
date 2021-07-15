@@ -54,27 +54,35 @@ class Comment extends Component {
     } = comment;
     const { show } = this.state;
     return !deleted &&
-      <div>
-        <p>time : {formatDate(timestamp)}</p>
-        {
-          show
-          ?
-          <EditComment 
-            hide={this.hideEditForm} 
-            comment={comment} 
-            handleEdit={this.handleEdit}
-          />
-          :
-          <p>body: {body}</p>
-        }
-        <p>author: {author}</p>
-        <VoteBtn id={id} handleVote={handleVoteComment}>
-          <p>vote: {voteScore}</p>
-        </VoteBtn>
-        <DeleteBtn handleDelete={handleDeleteComment} id={id} />
-        <p></p>
-        <EditBtn showEditForm={this.showEditForm} commentEdit />
-        <hr />
+      <div className="comment-container">
+        <div className="vote-btn">
+          <VoteBtn id={id} handleVote={handleVoteComment}>
+            <span>{voteScore}</span>
+          </VoteBtn>
+        </div>
+        <div className="content">
+          {
+            show
+            ?
+            <EditComment 
+              hide={this.hideEditForm} 
+              comment={comment} 
+              handleEdit={this.handleEdit}
+            />
+            :
+            <p>{body}</p>
+          }
+          <div className="comment-footer">
+            <div className="time-auther-wrapper">
+              <span className="time">{formatDate(timestamp)}</span>
+              <span className="author">by <strong>{author}</strong></span>
+            </div>
+            <div className="edit-delete-wrapper">
+              <EditBtn showEditForm={this.showEditForm} commentEdit />
+              <DeleteBtn handleDelete={handleDeleteComment} id={id} />
+            </div>
+          </div>
+        </div>
       </div>   
   }
 }

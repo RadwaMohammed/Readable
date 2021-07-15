@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form';
-
+ import { MdUnfoldMore }  from 'react-icons/md';
 class SortBy extends Component {
   state={
     value: ""
@@ -25,13 +24,16 @@ class SortBy extends Component {
   render() {
     const {value} = this.state;
     return (
-      <Form.Control as="select" onChange={this.handleChange} value={value}>
-        <option value="" disabled>Sort By</option>
-        <option value="timestamp-desc">Newest</option>
-        <option value="timestamp-asc">Oldest</option>
-        <option value="voteScore-desc">High Score</option>
-        <option value="voteScore-asc">Low Score</option>
-      </Form.Control>
+      <div className="sort-wrapper">
+        <select onChange={this.handleChange} value={value}>
+          <option value="" disabled>Sort By</option>
+          <option value="timestamp-desc">Newest</option>
+          <option value="timestamp-asc">Oldest</option>
+          <option value="voteScore-desc">High Score</option>
+          <option value="voteScore-asc">Low Score</option>
+        </select>
+        <span className="arrow"><MdUnfoldMore className='sort-icon'/></span>
+      </div>
     )
   }
 }

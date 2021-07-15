@@ -13,7 +13,7 @@ export default function CommentsList(props) {
               <Comment comment={comment}/>
             </div>
           ))
-          : <p>There is no comments</p>
+          : <p className="no-comments">There is no comments in this post.</p>
         }
 
 

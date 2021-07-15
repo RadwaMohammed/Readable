@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleAddComment } from '../actions/comments';
+import { MdAdd } from "react-icons/md";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 
 class AddComment extends Component {
   state = {
     commentAuthor: '',
-    comment: ''
+    comment: '' 
   };
   /**
    * Handle the change on the input text 
@@ -40,11 +40,12 @@ class AddComment extends Component {
   }
   render() {
     const { commentAuthor, comment } = this.state;
+    const isEmpty = !commentAuthor.trim() || !comment.trim();
     return (
       <Accordion>
         <Card>
           <Accordion.Toggle as={Card.Header} eventKey="0">
-            Add a comment
+            <MdAdd className="add-comment-icon" /> Add New Comment
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
@@ -69,13 +70,13 @@ class AddComment extends Component {
                     onChange={this.handleChange}
                   />
                 </Form.Group>
-                <Button 
-                  variant="primary" 
+                <p className="not-empty">{isEmpty ? 'All input fields must be filled out.' : ''}</p>
+                <button 
                   type="submit"
-                  disabled={!commentAuthor.trim() || !comment.trim()}
+                  disabled={isEmpty}
                 >
-                  Add a comment
-                </Button>
+                  Add comment
+                </button>
               </Form>
             </Card.Body>
           </Accordion.Collapse>

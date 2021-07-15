@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 export default class EditComment extends Component {
@@ -42,17 +41,20 @@ export default class EditComment extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-        
-        <Button variant="secondary" onClick={()=> hide()}>
-          Cancel
-        </Button>
-        <Button 
-          variant="primary" 
-          type="submit"
-          disabled={!comment.trim()}
-        >
-          Save
-        </Button>
+        <div className="btns-not-empty-container">
+          <div className="comment-btns-container">
+            <button 
+              type="submit"
+              disabled={!comment.trim()}
+            >
+              Save
+            </button>
+            <button type="button" className="cancel-btn" onClick={()=> hide()}>
+              Cancel
+            </button>
+          </div>
+          <p className="not-empty">{!comment.trim() ? 'You must fill the input field.' : ''}</p>
+        </div>
         
       </Form>
     )

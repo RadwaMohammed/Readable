@@ -1,8 +1,21 @@
 import React, { Component, Fragment } from 'react';
-import  { Redirect } from 'react-router-dom';
+import  { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { formatDate, sortBy } from '../utils/helper';
-import { handleVotePost, handleDeletePost, handleEditPost } from '../actions/posts';
+import { 
+  handleVotePost, 
+  handleDeletePost, 
+  handleEditPost 
+} from '../actions/posts';
+import { 
+  SiReact, 
+  SiRedux, 
+  SiUdacity 
+} from 'react-icons/si';
+import { 
+  BsChatSquareDots, 
+  BsArrowReturnLeft 
+} from 'react-icons/bs';
 import CommentsList from './CommentsList';
 import AddComment from './AddComment';
 import SortBy from './SortBy';
@@ -32,7 +45,11 @@ class PostDetails extends Component {
       categories,
       categoryPath
      } = this.props;
-
+    const categoryIcons = {
+      'react': <SiReact className="category-icon" />,
+      'redux': <SiRedux className="category-icon" />,
+      'udacity': <SiUdacity className="category-icon" />
+    };
     // Sort posts depending on user's option
     const sortedComments = sortBy(comments, sortOption);
     const {
@@ -45,36 +62,71 @@ class PostDetails extends Component {
       commentCount,
       id
     } = post;
-
+    const { history } = this.props;
     return  myPost 
       ? 
       // Make sure that tha posts path in the right category
       (category === categoryPath 
         ?
         <Fragment>
-        <div>
-          <p>time : {formatDate(timestamp)}</p>
-          <p>title: {title}</p>
-          <p>body: {body}</p>
-          <p>author: {author}</p>
-          <p>category: {category}</p>   
-          <VoteBtn id={id} handleVote={handleVotePost}>
-            <p>vote: {voteScore}</p>
-          </VoteBtn>
-          <p>comment: {commentCount}</p>
-          <DeleteBtn handleDelete={handleDeletePost} id={id} redirectHome />
-          <p></p>
-          <EditBtn id={id} currentData={post} handleEdit={handleEditPost} categories={categories} />
-          <hr />
-        </div>
-        <AddComment postId={id} />
-        <SortBy handleSorting={this.handleSorting} />
-        <CommentsList comments={sortedComments}/>
-      </Fragment>
-      :
-      <Redirect to={`/${category}/${id}`} />)
-    : 
-    <Redirect to='/404' />
+          <button type="button" className="back-btn" onClick={history.goBack}>
+            <BsArrowReturnLeft /> Back
+          </button>
+          <div className="detail-wrapper">
+            <div className="post-wrapper">
+              <div className="post-header">
+                <h2 className="detail-title">{title}</h2>
+                <Link className="category" to={`/${category}`}>{categoryIcons[category]}{category}</Link>
+              </div>
+              <span className="time">{formatDate(timestamp)}</span>
+              <span className="author">by <strong>{author}</strong></span>
+              <div className="post-content-wrapper">
+                <div className="body-score-wrapper">
+                  <div className="vote-btn">
+                    <VoteBtn id={id} handleVote={handleVotePost}>
+                      <span>{voteScore}</span>
+                    </VoteBtn>
+                  </div>
+                  <div className="content">
+                    <p>
+                      {body}
+                    </p>
+                    <div className="post-btns-wrapper">
+                      <button 
+                        className ="comments-link" 
+                        onClick={
+                          () => document.getElementById('comments').scrollIntoView({
+                            // optional params
+                            behavior: 'smooth',
+                            block: 'start',
+                            inline: 'center',
+                          })
+                        }
+                      >
+                        <BsChatSquareDots />
+                        {`  ${commentCount} comment${commentCount === 1 ? '' : 's'}`}
+                      </button>
+                      <div className="edit-delete-wrapper">
+                        <EditBtn id={id} currentData={post} handleEdit={handleEditPost} categories={categories} />
+                        <DeleteBtn handleDelete={handleDeletePost} id={id} redirectHome />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <AddComment postId={id} />
+            <h3 className="comments-title" id="comments">Comments</h3>
+            <div className="comments-wrapper">
+              <SortBy handleSorting={this.handleSorting} />
+              <CommentsList comments={sortedComments}/>
+            </div>
+          </div>
+        </Fragment>
+        :
+        <Redirect to={`/${category}/${id}`} />)
+      : 
+      <Redirect to='/404' />
     }
 
 }

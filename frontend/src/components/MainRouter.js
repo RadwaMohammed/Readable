@@ -11,14 +11,14 @@ class MainRouter extends Component {
     const { categoryPath } = this.props;
     return (
       <Router>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={PostsView} />
-          <Route exact path={`/:category(${categoryPath})`} component={PostsView} />
-          <Route exact path={`/:category(${categoryPath})/:post_id`} component={PostDetails} />
-          <Route exact path='/posts/add' component={AddPost} />
-          <Route component={NotFound} />
-        </Switch>
+          <Header />
+          <Switch>
+            <Route exact path='/' component={PostsView} />
+            <Route exact path={`/:category(${categoryPath})`} component={PostsView} />
+            <Route exact path={`/:category(${categoryPath})/:post_id`} component={PostDetails} />
+            <Route exact path='/posts/add' component={AddPost} />
+            <Route component={NotFound} />
+          </Switch>
       </Router>
     )
   }

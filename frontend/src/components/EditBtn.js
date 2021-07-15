@@ -41,7 +41,7 @@ class EditBtn extends Component {
     const { currentData, categories, commentEdit } = this.props;
     return (
       <Fragment>
-        <button onClick={() => this.showEditModal()}><FaEdit /></button>
+        <button className="edit-btn" onClick={() => this.showEditModal()}><FaEdit /> Edit</button>
         {
           (show && !commentEdit) 
             &&

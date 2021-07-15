@@ -25,8 +25,10 @@ class PostsView extends Component {
       <Fragment>
         <Categories />
         <AddPostBtn />
-        <SortBy handleSorting={this.handleSorting} />
-        <PostsList posts={sortedPosts} />
+        <div className="posts-list-wrapper">
+          <SortBy handleSorting={this.handleSorting} />
+          <PostsList posts={sortedPosts} />
+        </div>
       </Fragment>
     )
   }

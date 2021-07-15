@@ -2,28 +2,40 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
-import { FaList } from "react-icons/fa";
+import { MdFormatListBulleted } from "react-icons/md";
 import { SiReact, SiRedux, SiUdacity } from "react-icons/si";
 
 
 class Categories extends Component {
   render() {
-    const  {categories} = this.props;
+    const {categories} = this.props;
     const navIcons = {
-      'react': <SiReact />,
-      'redux': <SiRedux />,
-      'udacity': <SiUdacity />
+      'react': <SiReact className="nav-icon" />,
+      'redux': <SiRedux className="nav-icon" />,
+      'udacity': <SiUdacity className="nav-icon" />
     };
     return (
-      <Nav variant="pills" defaultActiveKey="/">
+      <Nav variant="pills" defaultActiveKey="/" className="categories-nav">
         <Nav.Item>
-          <Nav.Link as={NavLink} exact to='/' activeClassName="active"><FaList /> All Categories</Nav.Link>
+          <Nav.Link 
+            as={NavLink} 
+            exact 
+            to="/" 
+            activeClassName="active"
+          >
+            <MdFormatListBulleted className="nav-icon" />All
+          </Nav.Link>
         </Nav.Item>
         {
           categories.map(category => 
             <Nav.Item key={category.name}>
-              <Nav.Link as={NavLink} exact to={`/${category.path}`} activeClassName="active">
-                {navIcons[category.name]} {category.name}
+              <Nav.Link 
+                as={NavLink} 
+                exact 
+                to={`/${category.path}`} 
+                activeClassName="active"
+              >
+                {navIcons[category.name]}{category.name}
               </Nav.Link>
             </Nav.Item>
           )
