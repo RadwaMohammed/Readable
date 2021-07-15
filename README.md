@@ -1,4 +1,4 @@
-# Readable Project
+# Readable
 
 A content and comment web app where users will be able to: 
 - Post content to predefined categories. 
