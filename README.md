@@ -1,22 +1,36 @@
-# Readable API Server
+# Readable Project
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+A content and comment web app where users will be able to: 
+- Post content to predefined categories. 
+- Comment on their posts and other users' posts. 
+- Vote on posts and comments. 
+- Edit and delete posts and comments.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+## Installation
 
-## Start Developing
+You should have `node` and `npm` installed in your machine, to confirm type `node --version` in your terminal.
+Steps to setup the project:
+- Download the project as a zip file or Clone the repository to your computer.
+- Navigate to the root directory of the project.
+- Install and start the API server
+    1. `cd api-server`
+    2. `npm install`
+    3. `node server`
+- Install the dependencies required for the project in another terminal window
+    1. `cd frontend`
+    2. `npm install`
+    3. `npm start` this will automatically launch the application in your default browser at [http://localhost:3000](http://localhost:3000).
 
-To get started developing right away:
+   _If you are using yarn, use `yarn install` and `yarn start` instead of using npm!_
 
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
-    - `npm start`
+## Dependencies
 
-## API Server
-
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+- [React](https://reactjs.org/)
+- [REACT ROUTER](https://reactrouter.com/)
+- [Redux](https://redux.js.org/)
+- [React Redux](https://react-redux.js.org/)
+- [Redux Thunk](https://www.npmjs.com/package/redux-thunk)
+- [React Redux Loading Bar](https://www.npmjs.com/package/react-redux-loading-bar)
+- [Node.js](https://nodejs.org/en/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Icons](https://react-icons.github.io/react-icons)
